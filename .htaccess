@@ -1,8 +1,34 @@
 DirectoryIndex index.html
-Options -Indexes
+Options -Indexes -MultiViews
+ServerSignature Off
+
+# --- HTTPS obligatoire (à activer une fois le certificat SSL actif sur OVH) ---
 RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1|192\.168\.|10\.)
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
 # Les adresses d'origine sans slash final restent valides
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}/index.html -f
 RewriteRule ^(.+[^/])$ /$1/ [R=301,L]
+
+# Fichiers cachés et sauvegardes inaccessibles
+<FilesMatch "(^\.|\.(bak|sql|sqlite|csv|log|sh|md|ini|env|sample\.php)$|~$)">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^\.htaccess$">
+  Require all denied
+</FilesMatch>
+
 AddType video/mp4 .mp4
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.jscache.com https://*.tacdn.com https://www.tripadvisor.com https://www.tripadvisor.fr https://www.tripadvisor.co.uk; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://awards.infcdn.net https://*.tacdn.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; media-src 'self'; frame-src 'self' https://maps.google.com https://www.google.com; connect-src 'self' https://www.jscache.com https://*.tripadvisor.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'"
+</IfModule>
