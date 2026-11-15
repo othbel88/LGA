@@ -17,9 +17,7 @@
  /* --- logo : devient blanc quand il passe sur un fond foncé --- */
  var lgo=q('.hdr .logo'),dkT=0;
  function lum(c){var m=c.match(/[\d.]+/g);if(!m)return null;var a=m.length>3?+m[3]:1;if(a<.5)return null;return (.299*m[0]+.587*m[1]+.114*m[2])/255}
- function darkUnder(){
-  if(!lgo||!hdr||!hdr.classList.contains('solid'))return false;
-  var r=lgo.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+ function darkAt(x,y){
   var els=D.elementsFromPoint(x,y);
   for(var i=0;i<els.length;i++){var e=els[i];if(e.closest('.hdr')||e.closest('.wa')||e.closest('.stick'))continue;
    for(;e&&e!==D.documentElement;e=e.parentElement){
@@ -30,7 +28,16 @@
    }
    return false}
   return false}
- function logoTone(){dkT=0;if(hdr)hdr.classList.toggle('dk',darkUnder())}
+ function darkEl(el,pts){
+  if(!el||!hdr||!hdr.classList.contains('solid'))return false;
+  var r=el.getBoundingClientRect(),y=r.top+r.height/2,n=0;
+  pts.forEach(function(p){if(darkAt(r.left+r.width*p,y))n++});
+  return n*2>pts.length}
+ var nv=q('.nav'),lgb=q('.lang-b');
+ function logoTone(){dkT=0;if(!hdr)return;
+  hdr.classList.toggle('dk',darkEl(lgo,[.5]));
+  hdr.classList.toggle('nd',darkEl(nv,[.12,.3,.5,.7,.88]));
+  hdr.classList.toggle('ld',darkEl(lgb,[.5]))}
  window.addEventListener('scroll',function(){if(!dkT)dkT=requestAnimationFrame(logoTone)},{passive:true});
  window.addEventListener('resize',logoTone);setTimeout(logoTone,300);
 

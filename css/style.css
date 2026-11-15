@@ -535,3 +535,10 @@ body.l-ar .rtxt .dc:first-letter,body.l-zh .rtxt .dc:first-letter,body.l-ko .rtx
   .hdr.solid .lang-b:hover{background:rgba(255,255,255,.12)}
 }
 @media(max-width:560px){.hdr.solid{height:74px}.hdr.solid .logo img{height:60px}}
+
+/* menu desktop : s'adapte au fond sur lequel il passe */
+@media(min-width:1241px){
+ .nav,.lang-b{transition:background .3s,color .3s,border-color .3s,box-shadow .3s}
+ .hdr.solid.nd .nav{color:#fff;background:rgba(20,23,63,.55);border-color:rgba(255,255,255,.22);box-shadow:0 12px 32px -14px rgba(0,0,0,.5)}
+ .hdr.solid.ld .lang-b{color:#fff;background:rgba(20,23,63,.55);border-color:rgba(255,255,255,.22);box-shadow:0 12px 32px -14px rgba(0,0,0,.5)}
+}
