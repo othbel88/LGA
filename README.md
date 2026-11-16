@@ -1,4 +1,4 @@
-# Le Grand Alcazar - site (aperçu GitHub Pages)
+# Le Grand Alcazar - branche maintest
 
-Version d'aperçu : chemins adaptés à `/LGA/`, formulaires PHP inactifs.
-Le site réel sera déployé à la racine sur OVH.
+Correctifs de sécurité : origine obligatoire, limite anti-spam propre au site, newsletter protégée par .htaccess, CSP durcie (empreintes des scripts).
+Aperçu GitHub Pages sous /LGA/ (formulaires PHP inactifs ici).
