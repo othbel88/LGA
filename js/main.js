@@ -55,26 +55,48 @@
  }
  D.addEventListener('keydown',function(e){if(e.key==='Escape'){menu(false);if(lg){lg.classList.remove('open')}}});
 
- /* --- bandeau d'accueil : diaporama (la 1re image est déjà dans la page) --- */
+ /* --- bandeau d'accueil : diaporama (la 1re image est déjà dans la page) ---
+    chargement réellement paresseux : une seule image supplémentaire est
+    créée à la fois, juste avant d'être montrée (jamais la liste entière
+    d'un coup), et l'image précédente est retirée du DOM une fois le fondu
+    terminé — pour ne pas alourdir le chargement initial de l'accueil. */
  var s=q('.hero-slides');
  if(s){
-  var dots=q('.hero-dots'),imgs=qa('img',s),k=0,timer;
+  var dots=q('.hero-dots'),cur=qa('img',s)[0],urls=[],k=0,timer;
   fetch(s.dataset.slides).then(function(r){return r.json()}).then(function(l){
    if(!l||!l.length)return;
-   var first=imgs[0]&&imgs[0].getAttribute('src');
-   l.forEach(function(u){if(u===first)return;var im=new Image();im.src=u;im.alt='';im.decoding='async';im.loading='lazy';s.appendChild(im)});
-   imgs=qa('img',s);
-   if(dots){dots.innerHTML='';imgs.slice(0,7).forEach(function(){dots.appendChild(D.createElement('i'))})}
-   go(0);
-   timer=setInterval(function(){go(k+1)},5500);
+   urls=l;
+   if(dots){dots.innerHTML='';urls.forEach(function(){dots.appendChild(D.createElement('i'))});var d=qa('i',dots);if(d[0])d[0].classList.add('on')}
+   if(urls.length>1)timer=setInterval(function(){go(k+1)},5500);
   }).catch(function(){});
   function go(n){
-   k=(n+imgs.length)%imgs.length;
-   imgs.forEach(function(im,i){im.classList.toggle('on',i===k)});
-   if(dots){var d=qa('i',dots);d.forEach(function(x,i){x.classList.remove('on')});void dots.offsetWidth;var t=d[k%d.length];if(t)t.classList.add('on')}
+   if(!urls.length||!cur)return;
+   var next=(n+urls.length)%urls.length;
+   if(next===k)return;
+   var im=new Image();im.alt='';im.decoding='async';
+   im.onload=function(){
+    s.appendChild(im);
+    void im.offsetWidth; // force le rendu avant la transition d'opacité
+    im.classList.add('on');
+    var old=cur;
+    old.classList.remove('on');
+    setTimeout(function(){if(old.parentNode)old.parentNode.removeChild(old)},1900);
+    cur=im;k=next;
+    if(dots){var d=qa('i',dots);d.forEach(function(x){x.classList.remove('on')});void dots.offsetWidth;if(d[k])d[k].classList.add('on')}
+   };
+   im.src=urls[next]; // onerror ignoré : le tour suivant retentera simplement
   }
-  D.addEventListener('visibilitychange',function(){if(D.hidden){clearInterval(timer)}else if(imgs.length>1){clearInterval(timer);timer=setInterval(function(){go(k+1)},5500)}});
+  D.addEventListener('visibilitychange',function(){if(D.hidden){clearInterval(timer)}else if(urls.length>1){clearInterval(timer);timer=setInterval(function(){go(k+1)},5500)}});
  }
+
+ /* --- vidéo de visite : le badge "lecture" couvre toute la zone, et
+    disparaît dès que la vidéo démarre --- */
+ qa('.vid').forEach(function(v){
+  var vi=q('video',v);if(!vi)return;
+  v.addEventListener('click',function(e){if(e.target===vi)return;vi.play()});
+  ['play','playing'].forEach(function(ev){vi.addEventListener(ev,function(){v.classList.add('playing')})});
+  ['pause','ended'].forEach(function(ev){vi.addEventListener(ev,function(){v.classList.remove('playing')})});
+ });
 
  /* --- rail des suites --- */
  qa('.rail-wrap').forEach(function(w){

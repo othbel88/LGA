@@ -182,8 +182,12 @@ body.l-zh .hero h1,body.l-ko .hero h1,body.l-ar .hero h1{font-style:normal}
 /* vidéo */
 .tour{text-align:center}
 .tour h2{font-size:clamp(38px,5.4vw,68px);margin-bottom:clamp(30px,5vw,56px)}
-.vid{max-width:1040px;margin:0 auto;border-radius:clamp(18px,3vw,34px);overflow:hidden;box-shadow:var(--shadow);background:#000;line-height:0;position:relative}
+.vid{max-width:1040px;margin:0 auto;border-radius:clamp(18px,3vw,34px);overflow:hidden;box-shadow:var(--shadow);background:#000;line-height:0;position:relative;cursor:pointer}
 .vid video{width:100%;height:auto;display:block;aspect-ratio:16/9;object-fit:cover}
+.vid .play-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(64px,9vw,94px);height:clamp(64px,9vw,94px);border-radius:50%;background:rgba(19,27,59,.55);border:1.5px solid var(--gold-l);display:flex;align-items:center;justify-content:center;transition:transform .25s ease,background .25s ease;pointer-events:none}
+.vid .play-badge svg{width:38%;height:38%;fill:var(--ivory);margin-left:4%}
+.vid:hover .play-badge{transform:translate(-50%,-50%) scale(1.08);background:var(--cobalt)}
+.vid.playing .play-badge{opacity:0;visibility:hidden;transition:opacity .2s ease}
 
 /* expériences */
 .xp{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
