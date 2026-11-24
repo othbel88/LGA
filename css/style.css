@@ -11,7 +11,7 @@
   --cobalt:#2E45AE; --cobalt-d:#1C2B74; --night:#131B3B;
   --gold:#B49A69; --gold-l:#D8C495; --gold-d:#80663E;
   --terra:#80663E; --terra-d:#5E4A2C; /* alias conservés pour compat : s'appuient désormais sur l'or foncé, plus de terracotta */
-  --r:4px; --r-s:3px; --shadow:0 18px 50px -20px rgba(19,27,59,.35); --shadow-s:0 6px 20px -8px rgba(19,27,59,.22);
+  --r:4px; --r-s:3px; --rad:10px; --shadow:0 18px 50px -20px rgba(19,27,59,.35); --shadow-s:0 6px 20px -8px rgba(19,27,59,.22);
   --fd:"Cormorant Garamond","Noto Serif SC","Songti SC","AppleMyungjo",Georgia,serif;
   --fb:"DM Sans","PingFang SC","Hiragino Sans GB","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
   --hh:104px; --w:1320px; --pad:clamp(20px,5vw,56px);
@@ -134,7 +134,7 @@ body.l-zh .hero h1,body.l-ko .hero h1,body.l-ar .hero h1{font-style:normal}
 .sec{padding:clamp(70px,10vw,140px) var(--pad);position:relative}
 .sec>.in{max-width:var(--w);margin:0 auto}
 .sec.sand{background:var(--sand)}
-.sec.dark{background:linear-gradient(165deg,#212b7d 0%,#14173F 100%);color:#fff}
+.sec.dark{background:linear-gradient(165deg,var(--cobalt-d) 0%,var(--night) 100%);color:#fff}
 .sec-head{max-width:720px;margin:0 0 clamp(34px,5vw,60px)}
 .sec-head.c{margin-inline:auto;text-align:center}
 .sec-head h2{font-size:clamp(38px,5.4vw,68px)}
