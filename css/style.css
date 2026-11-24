@@ -139,6 +139,7 @@ body.l-zh .hero h1,body.l-ko .hero h1,body.l-ar .hero h1{font-style:normal}
 .sec-head.c{margin-inline:auto;text-align:center}
 .sec-head h2{font-size:clamp(38px,5.4vw,68px)}
 .sec-head p{margin-top:18px;color:var(--muted);font-size:18px}.sec.dark .sec-head p{color:rgba(255,255,255,.78)}
+.sec.dark .intro-txt h2,.sec.dark .intro-txt p{color:#fff}.sec.dark .intro-txt p:first-of-type:first-letter{color:var(--gold-l)}
 .eyebrow{display:inline-block;font:700 12px var(--fb);letter-spacing:.22em;text-transform:uppercase;color:var(--terra);margin-bottom:14px}
 .sec.dark .eyebrow{color:var(--gold-l)}
 .orn{display:block;width:44px;height:3px;border-radius:2px;margin:0 0 20px;background:linear-gradient(90deg,var(--gold),var(--gold-l))}.c .orn,.orn.c{margin-inline:auto}
