@@ -15,7 +15,7 @@ function build(){
   var msg=L.sel+': '+svc.s+' ('+svc.p+' MAD, '+svc.d+')\n'+U.date+': '+d+' '+slot+'\n'+L.people+': '+f.people.value;
   var fd=new FormData();fd.append('prenom',f.prenom.value);fd.append('email',f.email.value);fd.append('phone',f.phone.value);fd.append('website',f.website.value);fd.append('message',msg);
   var ok=f.querySelector('.ok'),er=f.querySelector('.bke');er.hidden=true;
-  fetch('othbel88/LGA/preview-recette-v8/api/contact.php',{method:'POST',body:fd}).then(function(r){if(!r.ok)throw 0;ok.textContent=L.ok;ok.hidden=false;f.querySelector('button').disabled=true}).catch(function(){
+  fetch('/othbel88/LGA/preview-recette-v8/api/contact.php',{method:'POST',body:fd}).then(function(r){if(!r.ok)throw 0;ok.textContent=L.ok;ok.hidden=false;f.querySelector('button').disabled=true}).catch(function(){
    er.textContent=L.err;er.hidden=false;location.href='mailto:legrandalcazar@gmail.com?subject='+encodeURIComponent(svc.s)+'&body='+encodeURIComponent(msg+'\n'+f.prenom.value+' '+f.phone.value)})};
 }
 function p2(n){return n<10?'0'+n:''+n}
