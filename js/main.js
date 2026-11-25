@@ -4,8 +4,14 @@
  function q(s,r){return (r||D).querySelector(s)}
  function qa(s,r){return [].slice.call((r||D).querySelectorAll(s))}
 
- /* --- en-tête : transparent sur le bandeau d'accueil, plein ensuite --- */
- var hdr=q('.hdr'),home=D.body.classList.contains('p-home'),dyn=home||!!q('.pagehead'),stick=q('.stick');
+ /* --- en-tête : transparent sur le bandeau d'accueil, plein ensuite ---
+    v8 (dernières corrections) : les fiches chambre (p-room) ont un bandeau de titre
+    (pagehead ph-c) sur fond ivoire, sans photo plein format derrière le header — donc
+    pas de bascule dynamique au scroll ici : le header doit rester "solid" en permanence,
+    tel que rendu côté serveur (cf. build_room_page, header(..., solid=True, ...)), sinon
+    ce onScroll() initial (y=0 au chargement) retirait aussitôt la classe "solid" et
+    rendait le logo/menu blancs illisibles sur fond clair. */
+ var hdr=q('.hdr'),home=D.body.classList.contains('p-home'),room=D.body.classList.contains('p-room'),dyn=!room&&(home||!!q('.pagehead')),stick=q('.stick');
  function onScroll(){
   var y=window.pageYOffset||H.scrollTop;
   if(hdr&&dyn)hdr.classList.toggle('solid',y>40||H.classList.contains('menu-open'));
