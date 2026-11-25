@@ -285,6 +285,46 @@ html.lb-open .wa,html.lb-open .stick,html.menu-open .wa,html.menu-open .stick{di
 .pagehead h2{font:600 12px var(--fb);letter-spacing:.3em;text-transform:uppercase;color:var(--gold-l);margin-top:14px}
 .pagehead h2+h2{margin-top:6px}
 .pagehead .titles h1{margin-bottom:6px}
+
+/* ---------- v7 : 3 familles de bandeaux (direction artistique, audit externe §5) ----------
+   L'ancien .pagehead.ph-img (ci-dessus) reste le filet de sécurité pour les pages non
+   réassignées. Les 3 familles ci-dessous diversifient la composition sans toucher à la
+   palette, à la typographie, ni aux boutons du design system v6. */
+
+/* Type A — Immersif (La Maison) : grande photo d'architecture, filtre localisé en bas
+   uniquement (jamais sur toute la photo), titre ancré en bas, éditorial. */
+.pagehead.ph-a{text-align:start;padding:0;min-height:clamp(420px,58vw,640px);display:flex;align-items:flex-end}
+.pagehead.ph-a:before{content:"";position:absolute;inset:0;z-index:-2;background:var(--bg) center/cover no-repeat}
+@media(max-width:700px){.pagehead.ph-a:before{background-image:var(--bg-m,var(--bg))}}
+.pagehead.ph-a:after{content:"";position:absolute;inset:0 0 0 0;z-index:-1;background:linear-gradient(0deg,rgba(19,27,59,.82) 0%,rgba(19,27,59,.4) 42%,rgba(19,27,59,0) 68%)}
+.pagehead.ph-a .ph-in{padding:0 var(--pad) clamp(34px,6vw,64px);max-width:860px}
+.pagehead.ph-a h1{font-size:clamp(38px,6.4vw,72px)}
+.pagehead.ph-a .orn.c,.pagehead.ph-a .c .orn{margin-inline:0}
+
+/* Type B — Éditorial (Restaurant, Bien-être, Expériences, Offres, Carnet, Avis, Contact) :
+   composition scindée photo/texte sur fond clair, pas de filtre bleu sur la photo,
+   alternance du côté de la photo selon la page (.ph-b-r = photo à droite). */
+.pagehead.ph-b{text-align:start;background:var(--sand);color:var(--ink);padding:calc(var(--hh) + clamp(20px,4vw,40px)) 0 0;overflow:visible}
+.pagehead.ph-b .ph-grid{max-width:var(--w);margin:0 auto;padding:0 var(--pad);display:grid;grid-template-columns:1.05fr 1fr;align-items:center;gap:clamp(28px,4vw,64px)}
+.pagehead.ph-b.ph-b-r .ph-grid{grid-template-columns:1fr 1.05fr}
+.pagehead.ph-b .ph-txt{order:2;padding-bottom:clamp(40px,6vw,76px)}
+.pagehead.ph-b.ph-b-r .ph-txt{order:1}
+.pagehead.ph-b .ph-photo{order:1;align-self:stretch;min-height:clamp(260px,32vw,420px);border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow);margin-bottom:clamp(-40px,-4vw,-24px)}
+.pagehead.ph-b.ph-b-r .ph-photo{order:2}
+.pagehead.ph-b .ph-photo img{width:100%;height:100%;object-fit:cover}
+.pagehead.ph-b h1{color:var(--ink);font-size:clamp(34px,4.6vw,54px)}
+.pagehead.ph-b h2{color:var(--terra);margin-top:10px}
+.pagehead.ph-b .orn.c,.pagehead.ph-b .c .orn{margin-inline:0}
+@media(max-width:860px){.pagehead.ph-b .ph-grid{grid-template-columns:1fr}.pagehead.ph-b .ph-txt,.pagehead.ph-b.ph-b-r .ph-txt{order:2;padding-bottom:clamp(30px,8vw,48px)}.pagehead.ph-b .ph-photo,.pagehead.ph-b.ph-b-r .ph-photo{order:1;min-height:260px;margin-bottom:28px}}
+
+/* Type C — Photographique (Suites & Chambres, Galerie) : fond clair, titre en tête,
+   grande photo propre sans filtre bleu en dessous — la photo et les infos priment. */
+.pagehead.ph-c{text-align:center;background:var(--ivory);color:var(--ink);padding:calc(var(--hh) + clamp(30px,5vw,54px)) var(--pad) 0}
+.pagehead.ph-c h1{color:var(--ink);font-size:clamp(36px,5.2vw,58px)}
+.pagehead.ph-c .ph-photo{max-width:var(--w);margin:clamp(26px,4vw,44px) auto 0;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow)}
+.pagehead.ph-c .ph-photo img{width:100%;max-height:52vw;object-fit:cover}
+.pagehead.ph-c .orn.c,.pagehead.ph-c .c .orn{margin-inline:auto}
+
 .page{max-width:1120px;margin:0 auto;padding:clamp(48px,7vw,96px) var(--pad) clamp(70px,9vw,120px)}
 .page>h2{font-size:clamp(28px,3.4vw,40px);margin:0 0 18px;text-align:center}
 .page p{font-size:18px;color:#3a364b}
