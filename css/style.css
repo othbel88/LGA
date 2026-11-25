@@ -397,6 +397,15 @@ a.gi:after{content:"";position:absolute;inset:0;background:linear-gradient(180de
 .resgal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:clamp(40px,6vw,76px)}
 .resgal a.gi{aspect-ratio:1/1}
 .resto .pics img{aspect-ratio:4/5;object-fit:cover;border-radius:999px 999px var(--rad) var(--rad)}
+/* v8 §9 (audit externe) : La Table scindée en sections distinctes — plats signature
+   (réutilise .pcard/.pimg/.pb, sans le badge prix .pr) et ambiance (terrasse/patio). */
+.resto-dishes,.resto-ambiance{margin-top:clamp(56px,8vw,96px)}
+.resto-dishes h2,.resto-ambiance h2{font-size:clamp(30px,3.6vw,44px);text-align:center;margin-bottom:clamp(28px,4vw,44px)}
+.resto-dishes .pcard.dish .pb{padding:16px 18px 20px}
+.resto-dishes .pcard.dish h3{font-size:19px;line-height:1.25;margin-bottom:4px}
+.resto-dishes .pcard.dish .pm{font-size:14px;line-height:1.4}
+.resto-ambiance{text-align:center;max-width:640px;margin-inline:auto}
+.resto-ambiance .btn{margin-top:8px}
 /* services */
 .serv-band{display:none}
 .serv .cols{grid-template-columns:1fr 1.6fr;align-items:start}
