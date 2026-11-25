@@ -321,7 +321,12 @@ html.lb-open .wa,html.lb-open .stick,html.menu-open .wa,html.menu-open .stick{di
 .pagehead.ph-b h1{color:var(--ink);font-size:clamp(34px,4.6vw,54px)}
 .pagehead.ph-b h2{color:var(--terra);margin-top:10px}
 .pagehead.ph-b .orn.c,.pagehead.ph-b .c .orn{margin-inline:0}
-@media(max-width:860px){.pagehead.ph-b .ph-grid{grid-template-columns:1fr}.pagehead.ph-b .ph-txt,.pagehead.ph-b.ph-b-r .ph-txt{order:2;padding-bottom:clamp(30px,8vw,48px)}.pagehead.ph-b .ph-photo,.pagehead.ph-b.ph-b-r .ph-photo{order:1;min-height:260px;margin-bottom:28px}}
+/* v8 §3 : sur .ph-b-r (Bien-être, Offres & Séjours...), la règle desktop
+   .pagehead.ph-b.ph-b-r .ph-grid (4 classes) était plus spécifique que cette
+   bascule mobile .pagehead.ph-b .ph-grid (3 classes) et l'emportait malgré la
+   media query — la colonne restait donc à deux voies en mobile sur ces pages
+   précisément. On ajoute le variant .ph-b-r ici pour égaler sa spécificité. */
+@media(max-width:860px){.pagehead.ph-b .ph-grid,.pagehead.ph-b.ph-b-r .ph-grid{grid-template-columns:1fr}.pagehead.ph-b .ph-txt,.pagehead.ph-b.ph-b-r .ph-txt{order:2;padding-bottom:clamp(30px,8vw,48px)}.pagehead.ph-b .ph-photo,.pagehead.ph-b.ph-b-r .ph-photo{order:1;min-height:260px;margin-bottom:28px}}
 
 /* Type C — Photographique (Suites & Chambres, Galerie) : fond clair, titre en tête,
    grande photo propre sans filtre bleu en dessous — la photo et les infos priment. */
