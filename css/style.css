@@ -291,6 +291,11 @@ html.lb-open .wa,html.lb-open .stick,html.menu-open .wa,html.menu-open .stick{di
 .pagehead h2{font:600 12px var(--fb);letter-spacing:.3em;text-transform:uppercase;color:var(--gold-l);margin-top:14px}
 .pagehead h2+h2{margin-top:6px}
 .pagehead .titles h1{margin-bottom:6px}
+/* v8 §4 : signature éditoriale surtitre + grand titre (paire courte au-dessus du h1 de
+   bandeau) — même habillage visuel que l'ancien h2 (petit, majuscules, espacé) mais un
+   <p>, pas un heading, pour ne pas inverser l'ordre sémantique h1/h2 de la page. */
+.pagehead .kicker{font:600 12px var(--fb);letter-spacing:.3em;text-transform:uppercase;color:var(--gold-l);margin:0 0 10px}
+.pagehead.ph-b .kicker,.pagehead.ph-c .kicker{color:var(--terra)}
 
 /* ---------- v7 : 3 familles de bandeaux (direction artistique, audit externe §5) ----------
    L'ancien .pagehead.ph-img (ci-dessus) reste le filet de sécurité pour les pages non
