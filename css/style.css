@@ -556,3 +556,10 @@ body.l-ar .rtxt .dc:first-letter,body.l-zh .rtxt .dc:first-letter,body.l-ko .rtx
  .hdr.solid.nd .nav a{color:#fff}.hdr.solid.nd .nav a:after{background:var(--gold-l)}
  .hdr.solid.ld .lang-b{color:#fff;border-color:rgba(255,255,255,.5)}
 }
+
+/* recette v6 : bandeau fixe "aperçu de travail" (build de prévisualisation uniquement,
+   jamais présent en production — cf. PREVIEW dans build.py) */
+.preview-banner{position:fixed;z-index:9999;top:0;left:0;right:0;height:28px;background:var(--gold);color:var(--night);text-align:center;font:600 12px/28px var(--fb), sans-serif;letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 8px}
+body.preview .hdr{top:28px}
+body.preview .mnav{inset:28px 0 0 0}
+@media (max-width:600px){.preview-banner{font-size:9px;letter-spacing:.02em}}
