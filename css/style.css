@@ -553,7 +553,12 @@ body.l-zh,body.l-ko{word-break:keep-all;line-break:strict}
 .rcard.is-soon .rt{color:var(--muted);font-weight:500;letter-spacing:.04em;text-transform:none;font-size:13px}
 .rcard.is-soon .go{color:var(--muted)}
 body.l-ar .rb .rt,body.l-ar .rb .go{letter-spacing:0}
-@media(max-width:560px){.rgrid{gap:12px}.rb{padding:12px 13px 15px}.rb h3{font-size:20px}.rb .rt{font-size:10px;letter-spacing:.1em}.rb .rm{font-size:12.5px}.rb .go{font-size:12px;padding-top:8px}}
+/* v8 §7 (audit externe) : essai 1 colonne vs 2 colonnes sur mobile (≤560px) — tranché en
+   faveur d'1 colonne. En 2 colonnes à cette largeur, les photos (zellige, bois sculpté,
+   plafonds peints — l'argument visuel principal de ces fiches) étaient réduites à de
+   petites vignettes peu lisibles ; à largeur de téléphone "phablette" (561-980px), 2
+   colonnes restent lisibles et sont conservées pour limiter le défilement. */
+@media(max-width:560px){.rgrid{grid-template-columns:1fr;gap:18px}.rb{padding:14px 16px 18px}.rb h3{font-size:22px}.rb .rt{font-size:10px;letter-spacing:.1em}.rb .rm{font-size:13px}.rb .go{font-size:12px;padding-top:8px}}
 .page.suites .rgrid+.btn{margin-top:18px}
 
 /* fiche détail */
