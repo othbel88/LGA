@@ -239,12 +239,13 @@ body.l-zh .hero h1,body.l-ko .hero h1,body.l-ar .hero h1{font-style:normal}
 .ftr{background:var(--night);color:rgba(255,255,255,.82);font-size:15px}
 .ftr-in{max-width:var(--w);margin:0 auto;padding:clamp(56px,7vw,90px) var(--pad) 28px;display:grid;grid-template-columns:auto auto auto minmax(0,1fr) auto;gap:clamp(24px,4vw,56px);align-items:center}
 .ftr-in>.ftr-col.ftrnav{align-self:start}
-.ftr h4{font:700 12px var(--fb);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);margin:0 0 16px}
+.ftr .ftrh{font:700 12px var(--fb);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);margin:0 0 16px}
 .ftr p{margin:0 0 8px}.ftr a{text-decoration:none}.ftr a:hover{color:#fff;text-decoration:underline}
 .ftr .flogo{display:block;line-height:0}.ftr .flogo img{height:150px;max-width:100%;width:auto;filter:brightness(0) invert(1)}
 .ftr-col.ftrnav nav{display:flex;flex-direction:column;gap:10px;white-space:nowrap}
 .ftr-col.ftrnav nav a{color:rgba(255,255,255,.82)}
 .ftr .news{max-width:520px;justify-self:center;width:100%}
+.ftr-news-tag{font-size:13px;line-height:1.5;color:rgba(255,255,255,.62);margin:-4px 0 12px}
 .newsletter{display:flex;gap:8px;margin-top:12px}
 .newsletter input{flex:1;min-width:0;height:48px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.08);color:#fff;font:inherit;font-size:15px}
 .newsletter input::placeholder{color:rgba(255,255,255,.55)}
@@ -547,7 +548,7 @@ html.js .rv.in{opacity:1;transform:none}
 
 /* ---------- RTL / langues ---------- */
 [dir=rtl] .hist .txt p:first-child:first-letter{float:none}
-body.l-ar .btn,body.l-ar .hdr .book,body.l-ar .kicker,body.l-ar .eyebrow,body.l-ar .pagehead h2,body.l-ar .ftr h4{letter-spacing:0}
+body.l-ar .btn,body.l-ar .hdr .book,body.l-ar .kicker,body.l-ar .eyebrow,body.l-ar .pagehead h2,body.l-ar .ftr .ftrh{letter-spacing:0}
 body.l-zh .btn,body.l-ko .btn,body.l-zh .hdr .book,body.l-ko .hdr .book,body.l-zh .kicker,body.l-ko .kicker,body.l-zh .eyebrow,body.l-ko .eyebrow{letter-spacing:.08em}
 body.l-zh,body.l-ko{word-break:keep-all;line-break:strict}
 @media print{.hdr,.wa,.stick,.mnav{display:none}.hero{min-height:auto}}
