@@ -476,7 +476,11 @@ a.gi:after{content:"";position:absolute;inset:0;background:linear-gradient(180de
 .coords a{text-decoration:none;color:var(--cobalt);font-weight:600}
 .map{margin:36px 0 10px}.mapf{position:relative}.mpin{position:absolute;left:50%;top:50%;width:27px;height:43px;transform:translate(-50%,-100%);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 43'%3E%3Cpath d='M13.5 0C6 0 0 6 0 13.5 0 23.6 13.5 43 13.5 43S27 23.6 27 13.5C27 6 21 0 13.5 0z' fill='%23EA4335' stroke='%23B31412' stroke-width='1'/%3E%3Ccircle cx='13.5' cy='13.5' r='5' fill='%23fff'/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 .map iframe{background:#ebe6da;width:100%;height:clamp(300px,42vw,440px);border:0;display:block;border-radius:var(--rad);box-shadow:var(--shadow-s)}.map .btn{margin-top:20px}
+/* v8 §16 (audit externe) : repli réel si l'iframe Google Maps reste vide (réseau restreint,
+   bloqueur) — relie explicitement le bouton "Voir sur Google Maps" déjà présent juste après. */
+.map-fallback{font-size:14px;color:var(--ink-60,#777);margin:10px 0 0}
 .cform{max-width:620px;margin:46px auto 0;display:grid;gap:14px;text-align:start;background:#fff;padding:clamp(22px,4vw,40px);border-radius:28px;box-shadow:var(--shadow)}
+.cform select{font:inherit;font-size:16px;padding:14px 18px;border:1.5px solid var(--sand-2);border-radius:14px;background:var(--ivory);width:100%;color:var(--ink)}
 .cform input,.cform textarea,.acc form input[type=text],.acc form input[type=email],.acc form input[type=password],.bkf input{font:inherit;font-size:16px;padding:14px 18px;border:1.5px solid var(--sand-2);border-radius:14px;background:var(--ivory);width:100%;color:var(--ink);transition:border-color .2s,box-shadow .2s}
 .cform input:focus,.cform textarea:focus,.acc form input:focus,.bkf input:focus{outline:0;border-color:var(--cobalt);box-shadow:0 0 0 4px rgba(46,60,155,.14)}
 .cform .btn{margin-top:4px}

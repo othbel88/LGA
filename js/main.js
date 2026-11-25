@@ -147,7 +147,7 @@
  /* --- formulaires (contact + newsletter) -> endpoints PHP --- */
  function ajax(f){f.addEventListener('submit',function(e){e.preventDefault();var ok=f.querySelector('.ok')||f.parentNode.querySelector('.ok');
   fetch(f.action,{method:'POST',body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;f.reset();if(ok)ok.hidden=false}).catch(function(){
-   var m=f.querySelector('[name=message]');var sub='Le Grand Alcazar';location.href='mailto:'+'legrandalcazar@gmail.com'+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(m?m.value:'')})})}
+   var m=f.querySelector('[name=message]');var c=f.querySelector('[name=categorie]');var sub=(c&&c.value)?c.value:'Le Grand Alcazar';location.href='mailto:'+'legrandalcazar@gmail.com'+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(m?m.value:'')})})}
  qa('.cform,.newsletter').forEach(ajax);
 
  /* --- v8 §12 : filtre de la Galerie (Tout / La Maison / Suites & Chambres / La Table) --- */
