@@ -419,6 +419,12 @@ a.gi:after{content:"";position:absolute;inset:0;background:linear-gradient(180de
 .wb-terrasse-img .ph-photo img{width:100%;height:100%;object-fit:cover}
 .wb-terrasse-txt .pm{margin-top:10px;color:var(--ink-60,#666)}
 @media(max-width:860px){.wb-terrasse-grid{grid-template-columns:1fr}.wb-terrasse-img{order:1}.wb-terrasse-txt{order:2;text-align:center}}
+/* v8 §12 (audit externe) : filtre réel de la Galerie, par provenance des photos
+   (La Maison / Suites & Chambres / La Table) — remplace la simple juxtaposition. */
+.gal-filter{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:var(--w);margin:clamp(26px,4vw,44px) auto 0;padding:0 var(--pad)}
+.gal-filter button{font:inherit;font-size:14px;letter-spacing:.02em;border:1px solid var(--line,#ddd);background:#fff;color:var(--ink);border-radius:999px;padding:9px 20px;cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.gal-filter button:hover{border-color:var(--terra)}
+.gal-filter button.on{background:var(--terra);border-color:var(--terra);color:#fff}
 /* services */
 .serv-band{display:none}
 .serv .cols{grid-template-columns:1fr 1.6fr;align-items:start}

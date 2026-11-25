@@ -149,4 +149,22 @@
   fetch(f.action,{method:'POST',body:new FormData(f)}).then(function(r){if(!r.ok)throw 0;f.reset();if(ok)ok.hidden=false}).catch(function(){
    var m=f.querySelector('[name=message]');var sub='Le Grand Alcazar';location.href='mailto:'+'legrandalcazar@gmail.com'+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(m?m.value:'')})})}
  qa('.cform,.newsletter').forEach(ajax);
+
+ /* --- v8 §12 : filtre de la Galerie (Tout / La Maison / Suites & Chambres / La Table) --- */
+ var galF=q('.gal-filter');
+ if(galF){
+  var items=qa('.collage a.gi',q('.gal-sec'));
+  var btns=qa('button',galF);
+  btns.forEach(function(b){
+   b.addEventListener('click',function(){
+    btns.forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    var cat=b.getAttribute('data-cat');
+    items.forEach(function(a){
+     var show=!cat||a.getAttribute('data-cat')===cat;
+     a.style.display=show?'':'none';
+    });
+   });
+  });
+ }
 })();
