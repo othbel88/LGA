@@ -540,6 +540,8 @@ body.l-zh,body.l-ko{word-break:keep-all;line-break:strict}
 @media(max-width:900px){.pgrid .pcard{flex-basis:calc((100% - 22px)/2)}}
 @media(max-width:560px){.pgrid .pcard{flex-basis:100%}}
 .pcard{background:#fff;border-radius:var(--rad);overflow:hidden;box-shadow:var(--shadow-s);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s}
+a.pcard,a.pcard h3{text-decoration:none;color:inherit}
+a.pcard .pb{text-align:center}
 .pcard:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
 .pimg{position:relative;aspect-ratio:4/3;overflow:hidden}
 .pimg img{width:100%;height:100%;object-fit:cover;transition:transform .8s}.pcard:hover .pimg img{transform:scale(1.05)}
