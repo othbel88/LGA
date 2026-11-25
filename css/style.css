@@ -50,7 +50,13 @@ p{margin:0 0 1.1em}b,strong{font-weight:700}
 .hdr{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--hh);color:#fff;pointer-events:none;transition:height .35s}
 .hdr-in{max-width:1560px;height:100%;margin:0 auto;padding:0 clamp(16px,2.4vw,40px);display:flex;align-items:center;gap:clamp(14px,2vw,32px)}
 .hdr-in>*{pointer-events:auto}
-.hdr.solid{height:84px;color:var(--ink)}
+.hdr.solid{height:84px;color:var(--ink);pointer-events:auto;background:var(--ivory);box-shadow:0 1px 0 var(--line)}
+.hdr.solid.dk{background:var(--night);color:#fff;box-shadow:0 1px 0 rgba(255,255,255,.1)}
+.hdr.solid.dk .nav{color:#fff}
+.hdr.solid.dk .lang-b{color:#fff;border-color:rgba(255,255,255,.5)}
+/* v8 : fond plein de l'en-tête une fois « solid », sur tous les formats — avant,
+   le desktop restait transparent même une fois « solid », d'où un logo ou un menu
+   parfois illisibles sur une photo ou une mosaïque claire sous l'en-tête */
 .logo{display:block;flex:none;line-height:0;position:relative;top:5px;transition:top .35s}
 .logo img{height:96px;width:auto;filter:brightness(0) invert(1);transition:filter .35s,height .35s}
 .hdr.solid .logo{top:0}.hdr.solid .logo img{filter:drop-shadow(0 0 5px rgba(251,247,238,.95)) drop-shadow(0 0 14px rgba(251,247,238,.7));height:70px}
@@ -603,12 +609,12 @@ body.l-ar .rtxt .dc:first-letter,body.l-zh .rtxt .dc:first-letter,body.l-ko .rtx
 }
 @media(max-width:560px){.hdr.solid{height:72px}.hdr.solid .logo img{height:58px}}
 
-/* menu desktop : le texte passe en ivoire/doré ou en encre selon le fond détecté sous la bannière */
-@media(min-width:1241px){
- .nav,.lang-b{transition:color .3s,border-color .3s}
- .hdr.solid.nd .nav a{color:#fff}.hdr.solid.nd .nav a:after{background:var(--gold-l)}
- .hdr.solid.ld .lang-b{color:#fff;border-color:rgba(255,255,255,.5)}
-}
+/* v8 : l'en-tête « solid » a désormais un fond plein uniforme (ivoire ou nuit,
+   voir règles .hdr.solid/.hdr.solid.dk ci-dessus) sur tous les formats, donc le
+   texte du menu et du sélecteur de langue suit ce même fond — plus de bascule
+   indépendante par élément (nav/langue), qui pouvait produire du texte blanc
+   sur un fond en réalité clair */
+@media(min-width:1241px){.nav,.lang-b{transition:color .3s,border-color .3s}}
 
 /* recette v6 : bandeau fixe "aperçu de travail" (build de prévisualisation uniquement,
    jamais présent en production — cf. PREVIEW dans build.py) */

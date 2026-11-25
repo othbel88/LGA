@@ -17,27 +17,56 @@
  /* --- logo : devient blanc quand il passe sur un fond foncé --- */
  var lgo=q('.hdr .logo'),dkT=0;
  function lum(c){var m=c.match(/[\d.]+/g);if(!m)return null;var a=m.length>3?+m[3]:1;if(a<.5)return null;return (.299*m[0]+.587*m[1]+.114*m[2])/255}
+ /* luminance réelle d'une photo/vidéo au point (x,y) — corrige l'ancienne
+    hypothèse « toute image = fond sombre », fausse dès qu'une photo claire
+    (zellige blanc, mur ivoire...) passe sous l'en-tête : le logo/menu
+    passaient alors en blanc sur un fond en réalité clair, donc invisibles. */
+ var _lc=null;
+ function imgLum(el,x,y){
+  try{
+   var r=el.getBoundingClientRect();
+   var iw=el.tagName==='VIDEO'?el.videoWidth:el.naturalWidth,ih=el.tagName==='VIDEO'?el.videoHeight:el.naturalHeight;
+   if(!iw||!ih||!r.width||!r.height)return null;
+   var fit=getComputedStyle(el).objectFit||'fill',nx,ny;
+   if(fit==='cover'||fit==='contain'){
+    var sc=fit==='cover'?Math.max(r.width/iw,r.height/ih):Math.min(r.width/iw,r.height/ih);
+    nx=(x-r.left-(r.width-iw*sc)/2)/sc;ny=(y-r.top-(r.height-ih*sc)/2)/sc;
+   }else{nx=(x-r.left)/r.width*iw;ny=(y-r.top)/r.height*ih}
+   nx=Math.max(0,Math.min(iw-1,nx));ny=Math.max(0,Math.min(ih-1,ny));
+   if(!_lc){_lc=D.createElement('canvas');_lc.width=3;_lc.height=3}
+   var ctx=_lc.getContext('2d',{willReadFrequently:true});
+   ctx.clearRect(0,0,3,3);
+   ctx.drawImage(el,nx-4,ny-4,8,8,0,0,3,3);
+   var d=ctx.getImageData(0,0,3,3).data,sum=0,n=0;
+   for(var i=0;i<d.length;i+=4){if(d[i+3]>10){sum+=(.299*d[i]+.587*d[i+1]+.114*d[i+2])/255;n++}}
+   return n?sum/n:null;
+  }catch(e){return null}
+ }
  function darkAt(x,y){
   var els=D.elementsFromPoint(x,y);
   for(var i=0;i<els.length;i++){var e=els[i];if(e.closest('.hdr')||e.closest('.wa')||e.closest('.stick'))continue;
    for(;e&&e!==D.documentElement;e=e.parentElement){
-    if(e.tagName==='IMG'||e.tagName==='VIDEO')return true;
+    if(e.tagName==='IMG'||e.tagName==='VIDEO'){var il=imgLum(e,x,y);return il===null?true:il<.45}
     var cs=getComputedStyle(e),l=lum(cs.backgroundColor);
     if(l!==null)return l<.45;
     if(cs.backgroundImage!=='none')return true;
    }
    return false}
   return false}
- function darkEl(el,pts){
-  if(!el||!hdr||!hdr.classList.contains('solid'))return false;
-  var r=el.getBoundingClientRect(),y=r.top+r.height/2,n=0;
-  pts.forEach(function(p){if(darkAt(r.left+r.width*p,y))n++});
-  return n*2>pts.length}
  var nv=q('.nav'),lgb=q('.lang-b');
+ /* v8 : l'en-tête « solid » a désormais un fond plein uniforme sur tous les
+    formats (voir style.css), donc une seule bascule dk pour tout l'en-tête —
+    on échantillonne large (logo + centre du menu + bouton langue) plutôt que
+    le seul point du logo, pour refléter correctement un fond composite. */
  function logoTone(){dkT=0;if(!hdr)return;
-  hdr.classList.toggle('dk',darkEl(lgo,[.5]));
-  hdr.classList.toggle('nd',darkEl(nv,[.12,.3,.5,.7,.88]));
-  hdr.classList.toggle('ld',darkEl(lgb,[.5]))}
+  var pts=[],n=0;
+  [[lgo,[.5]],[nv,[.12,.3,.5,.7,.88]],[lgb,[.5]]].forEach(function(t){
+   if(!t[0]||!hdr.classList.contains('solid'))return;
+   var r=t[0].getBoundingClientRect(),y=r.top+r.height/2;
+   t[1].forEach(function(p){pts.push(darkAt(r.left+r.width*p,y));n++})
+  });
+  var dark=0;pts.forEach(function(d){if(d)dark++});
+  hdr.classList.toggle('dk', n>0 && dark*2>n)}
  window.addEventListener('scroll',function(){if(!dkT)dkT=requestAnimationFrame(logoTone)},{passive:true});
  window.addEventListener('resize',logoTone);setTimeout(logoTone,300);
 
