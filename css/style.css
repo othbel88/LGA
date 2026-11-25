@@ -342,6 +342,15 @@ body.l-ar .hist .txt p:first-child:first-letter,body.l-zh .hist .txt p:first-chi
 body.l-ar .intro-txt p:first-of-type:first-letter,body.l-ar .resto-h .rv p:first-of-type:first-letter,body.l-ar .resto .txt p:first-child:first-letter,body.l-ar body.l-zh .intro-txt p:first-of-type:first-letter,body.l-zh .resto-h .rv p:first-of-type:first-letter,body.l-zh .resto .txt p:first-child:first-letter,body.l-zh body.l-ko .intro-txt p:first-of-type:first-letter,body.l-ko .resto-h .rv p:first-of-type:first-letter,body.l-ko .resto .txt p:first-child:first-letter{all:unset}
 .hist .txt .btn{margin-top:14px}
 @media(max-width:900px){.cols{grid-template-columns:1fr}.hist .pics{position:static}}
+/* v7 §7 : narration La Maison — intertitres + chronologie visuelle, dans .hist .txt */
+.hist .txt h3{font-size:clamp(21px,2.4vw,26px);margin:clamp(30px,4vw,44px) 0 12px;color:var(--cobalt-d)}
+.hist .txt h3:first-of-type{margin-top:28px}
+.chrono{list-style:none;margin:18px 0 8px;padding:0;display:flex;flex-direction:column;gap:0}
+.chrono li{position:relative;padding:0 0 22px 28px;border-inline-start:2px solid var(--sand-2)}
+.chrono li:last-child{border-color:transparent;padding-bottom:0}
+.chrono li:before{content:"";position:absolute;inset-inline-start:-6px;top:2px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.chrono b{display:block;font:700 13px var(--fb);letter-spacing:.08em;color:var(--terra);margin-bottom:2px}
+[dir=rtl] .chrono li{padding:0 28px 22px 0}[dir=rtl] .chrono li:before{inset-inline-start:auto;inset-inline-end:-6px}
 .suites,.avis,.contact{text-align:center}
 .suites>p,.contact>p{max-width:780px;margin-inline:auto}
 .gal-sec{margin-top:clamp(40px,6vw,80px)}
