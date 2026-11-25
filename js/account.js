@@ -1,7 +1,7 @@
 
 (function(){
  var root=document.querySelector('.acc'),csrf='';
- function api(a,body){return fetch('/othbel88/LGA/preview-recette-v8/api/auth.php?a='+a,{method:body===undefined?'GET':'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF':csrf},body:body===undefined?undefined:JSON.stringify(body)}).then(function(r){return r.json().then(function(j){if(!r.ok)throw j;return j})})}
+ function api(a,body){return fetch('othbel88/LGA/preview-recette-v8/api/auth.php?a='+a,{method:body===undefined?'GET':'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF':csrf},body:body===undefined?undefined:JSON.stringify(body)}).then(function(r){return r.json().then(function(j){if(!r.ok)throw j;return j})})}
  function refresh(){return api('me').then(function(j){csrf=j.csrf;return j.user}).catch(function(){return null})}
  // lien « S'identifier » de l'en-tête : affiche le prénom une fois connecté
  var lg=document.querySelector('.hdr .login');
